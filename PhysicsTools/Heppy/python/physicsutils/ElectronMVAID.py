@@ -144,6 +144,23 @@ ElectronMVAID_Fall17Iso = ElectronMVAID_Fall17("ElectronMVAEstimatorRun2Fall17",
     "RecoEgamma/ElectronIdentification/data/Fall17/EIDmva_EE_10_2017_puinfo_iso_BDT.weights.xml"
 )
 
+ElectronMVAID_Fall17noIsoV2 = ElectronMVAID_Fall17("ElectronMVAEstimatorRun2Fall17V2","V2","noIso",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17NoIsoV2/EB1_5.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17NoIsoV2/EB2_5.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17NoIsoV2/EE_5.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17NoIsoV2/EB1_10.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17NoIsoV2/EB2_10.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17NoIsoV2/EE_10.weights.xml.gz"
+)
+ElectronMVAID_Fall17IsoV2 = ElectronMVAID_Fall17("ElectronMVAEstimatorRun2Fall17V2","V2","Iso",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17IsoV2/EB1_5.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17IsoV2/EB2_5.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17IsoV2/EE_5.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17IsoV2/EB1_10.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17IsoV2/EB2_10.weights.xml.gz",
+    "RecoEgamma/ElectronIdentification/data/MVAWeightFiles/Fall17IsoV2/EE_10.weights.xml.gz"
+)
+
 ElectronMVAID_ByName = {
     'Trig':ElectronMVAID_Trig,
     'NonTrig':ElectronMVAID_NonTrig,
@@ -157,4 +174,6 @@ ElectronMVAID_ByName = {
     'Spring16GP':ElectronMVAID_Spring16GP,
     'Fall17noIso':ElectronMVAID_Fall17noIso,
     'Fall17Iso':ElectronMVAID_Fall17Iso,
+    'Fall17noIsoV2':ElectronMVAID_Fall17noIsoV2,
+    'Fall17IsoV2':ElectronMVAID_Fall17IsoV2,
 }

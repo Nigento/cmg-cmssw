@@ -256,7 +256,7 @@ class Electron( Lepton ):
                 self._mvaRun2[name] =  self.physObj.userFloat("ElectronMVAEstimatorRun2Spring15NonTrig25nsV1Values")
                 return self._mvaRun2[name]
             if name not in ElectronMVAID_ByName: raise RuntimeError, "Unknown electron run2 mva id %s (known ones are: %s)\n" % (name, ElectronMVAID_ByName.keys())
-            if name in ("Spring16HZZ","Spring16GP","Fall17noIso","Fall17Iso"):
+            if name in ("Spring16HZZ","Spring16GP","Fall17noIso","Fall17Iso","Fall17noIsoV2","Fall17IsoV2"):
                 if self.event == None: raise RuntimeError, "You need to set electron.event before calling any new MVA"
                 self._mvaRun2[name] = ElectronMVAID_ByName[name](self.physObj, self.event, self.associatedVertex, self.rho, debug)
             else:
