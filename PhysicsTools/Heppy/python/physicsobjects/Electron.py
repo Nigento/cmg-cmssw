@@ -581,6 +581,7 @@ class Electron( Lepton ):
                         A = 9.00720913211
                     return self.mvaRun2(name) > c-A*exp(-self.pt()/tau)
                 elif wp == 'wp80':
+                    if self.pt()<10 and eta<0.8:
                         c = 3.26449620468
                         tau = 3.32657149223
                         A = 8.84669783568
