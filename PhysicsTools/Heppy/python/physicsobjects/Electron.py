@@ -5,6 +5,9 @@ import ROOT
 import sys
 from math import exp
 
+def raw_to_normalized(raw):
+    return 2.0/(1.0+exp(-2.0*raw))-1
+
 class Electron( Lepton ):
 
     def __init__(self, *args, **kwargs):
@@ -544,16 +547,16 @@ class Electron( Lepton ):
                         A = 2.2916152615134173
                     return self.mvaRun2(name) > c-A*exp(-self.pt()/tau)
 
-            elif name == "Fall17noIsoV2":
+            elif name == "Fall17noIsoV2": # !! raw WP
                 if wp == 'Loose':
                     if self.pt() < 10:
-                        if   eta < 0.8  : return self.mvaRun2(name) > 0.894411158628
-                        elif eta < 1.479: return self.mvaRun2(name) > 0.791966464633
-                        else            : return self.mvaRun2(name) > 1.47104857173
+                        if   eta < 0.8  : return self.mvaRun2(name) > raw_to_normalized(0.894411158628)
+                        elif eta < 1.479: return self.mvaRun2(name) > raw_to_normalized(0.791966464633)
+                        else            : return self.mvaRun2(name) > raw_to_normalized(1.47104857173)
                     else:
-                        if   eta < 0.8  : return self.mvaRun2(name) > -0.293962958665
-                        elif eta < 1.479: return self.mvaRun2(name) > -0.250424758584
-                        else            : return self.mvaRun2(name) > -0.130985179031
+                        if   eta < 0.8  : return self.mvaRun2(name) > raw_to_normalized(-0.293962958665)
+                        elif eta < 1.479: return self.mvaRun2(name) > raw_to_normalized(-0.250424758584)
+                        else            : return self.mvaRun2(name) > raw_to_normalized(-0.130985179031)
                 elif wp == 'wp90':
                     if self.pt()<10 and eta<0.8:
                         c = 2.77072387339
@@ -579,7 +582,7 @@ class Electron( Lepton ):
                         c = 4.16921343208
                         tau = 13.2017224621
                         A = 9.00720913211
-                    return self.mvaRun2(name) > c-A*exp(-self.pt()/tau)
+                    return self.mvaRun2(name) > raw_to_normalized(c-A*exp(-self.pt()/tau))
                 elif wp == 'wp80':
                     if self.pt()<10 and eta<0.8:
                         c = 3.26449620468
@@ -605,18 +608,18 @@ class Electron( Lepton ):
                         c = 5.43175865738
                         tau = 15.4290075949
                         A = 7.56899692285
-                    return self.mvaRun2(name) > c-A*exp(-self.pt()/tau)
+                    return self.mvaRun2(name) > raw_to_normalized(c-A*exp(-self.pt()/tau))
 
-            elif name == "Fall17IsoV2":
+            elif name == "Fall17IsoV2": # !! raw WP
                 if wp == 'Loose':
                     if self.pt() < 10:
-                        if   eta < 0.8  : return self.mvaRun2(name) > 0.700642584415
-                        elif eta < 1.479: return self.mvaRun2(name) > 0.739335420875
-                        else            : return self.mvaRun2(name) > 1.45390456109
+                        if   eta < 0.8  : return self.mvaRun2(name) > raw_to_normalized(0.700642584415)
+                        elif eta < 1.479: return self.mvaRun2(name) > raw_to_normalized(0.739335420875)
+                        else            : return self.mvaRun2(name) > raw_to_normalized(1.45390456109)
                     else:
-                        if   eta < 0.8  : return self.mvaRun2(name) > -0.146270871164
-                        elif eta < 1.479: return self.mvaRun2(name) > -0.0315850882679
-                        else            : return self.mvaRun2(name) > -0.0321841194737
+                        if   eta < 0.8  : return self.mvaRun2(name) > raw_to_normalized(-0.146270871164)
+                        elif eta < 1.479: return self.mvaRun2(name) > raw_to_normalized(-0.0315850882679)
+                        else            : return self.mvaRun2(name) > raw_to_normalized(-0.0321841194737)
                 elif wp == 'wp90':
                     if self.pt()<10 and eta<0.8:
                         c = 2.84704783417
@@ -642,7 +645,7 @@ class Electron( Lepton ):
                         c = 4.37338792902
                         tau = 14.0776094696
                         A = 8.48513324496
-                    return self.mvaRun2(name) > c-A*exp(-self.pt()/tau)
+                    return self.mvaRun2(name) > raw_to_normalized(c-A*exp(-self.pt()/tau))
                 elif wp == 'wp80':
                     if self.pt()<10 and eta<0.8:
                         c = 3.53495358797
@@ -668,7 +671,7 @@ class Electron( Lepton ):
                         c = 5.64936312428
                         tau = 16.3664949747
                         A = 7.19607610311
-                    return self.mvaRun2(name) > c-A*exp(-self.pt()/tau)
+                    return self.mvaRun2(name) > raw_to_normalized(c-A*exp(-self.pt()/tau))
 
             else: raise RuntimeError, "Ele MVA ID type not found"
 
