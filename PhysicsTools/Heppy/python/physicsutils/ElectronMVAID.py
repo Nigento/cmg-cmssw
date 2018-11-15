@@ -50,8 +50,10 @@ class ElectronMVAID_Fall17:
     def __call__(self,ele,event,vtx,rho,debug=False):
         if not self._init:
             ROOT.gSystem.Load("libRecoEgammaElectronIdentification")
-            if self.flavor=='noIso': self.estimator = ROOT.ElectronMVAEstimatorRun2Fall17(self.tag,self.name,False)
-            elif self.flavor=='Iso': self.estimator = ROOT.ElectronMVAEstimatorRun2Fall17(self.tag,self.name,True)
+            if self.flavor=='Iso' : useIso = True
+            else: useIso = False
+            if self.tag=='V1': self.estimator = ROOT.ElectronMVAEstimatorRun2Fall17(self.tag,self.name,useIso)
+            elif self.tag=='V2': self.estimator = ROOT.ElectronMVAEstimatorRun2Fall17(self.tag,self.name,useIso)
             else: raise RuntimeError, 'Undefined flavor of ElectronMVAID_Fall17'
             self.estimator.init(self.sxmls)
             self._init = True
