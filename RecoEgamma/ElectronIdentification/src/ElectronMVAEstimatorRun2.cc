@@ -25,6 +25,30 @@ ElectronMVAEstimatorRun2::ElectronMVAEstimatorRun2(const edm::ParameterSet& conf
 
 }
 
+ElectronMVAEstimatorRun2::ElectronMVAEstimatorRun2(const std::string &mvaTag,
+                                                   const std::string &mvaName,
+                                                   const std::vector <std::string> &weightFileNames,
+                                                   const int &nCategories,
+                                                   const bool debug,
+                                                   const std::string variableDefinition, 
+                                               const std::vector <std::string> categoryCutStrings):
+  AnyMVAEstimatorRun2Base(mvaTag, mvaName, nCategories, debug),
+  mvaVarMngr_(variableDefinition)
+{
+  if( (int)(categoryCutStrings.size()) != getNCategories() )
+    throw cms::Exception("MVA config failure: ")
+      << "wrong number of category cuts in " << getName() << getTag() << std::endl;
+
+  for (int i = 0; i < getNCategories(); ++i) {
+      StringCutObjectSelector<reco::GsfElectron> select(categoryCutStrings[i]);
+      categoryFunctions_.push_back(select);
+  }
+
+  // Initialize GBRForests from weight files
+  init(weightFileNames);
+
+}
+
 void ElectronMVAEstimatorRun2::init(const std::vector<std::string> &weightFileNames) {
 
   if(isDebug()) {
@@ -77,15 +101,7 @@ void ElectronMVAEstimatorRun2::setConsumes(edm::ConsumesCollector&& cc) {
   mvaVarMngr_.setConsumes(std::move(cc));
 }
 
-float ElectronMVAEstimatorRun2::
-mvaValue( const edm::Ptr<reco::Candidate>& candPtr, const edm::EventBase & iEvent, int &iCategory) const {
-
-  const edm::Ptr<reco::GsfElectron> gsfPtr{ candPtr };
-  if( gsfPtr.get() == nullptr ) {
-    throw cms::Exception("MVA failure: ")
-      << " given particle is expected to be reco::GsfElectron or pat::Electron," << std::endl
-      << " but appears to be neither" << std::endl;
-  }
+float ElectronMVAEstimatorRun2::mvaValue( const edm::Ptr<reco::GsfElectron>& gsfPtr, const edm::EventBase & iEvent, int &iCategory) const {
 
   iCategory = findCategory( gsfPtr );
 
@@ -111,6 +127,27 @@ mvaValue( const edm::Ptr<reco::Candidate>& candPtr, const edm::EventBase & iEven
   }
 
   return response;
+}
+
+float ElectronMVAEstimatorRun2::mvaValue( const edm::Ptr<reco::Candidate>& candPtr, const edm::EventBase & iEvent, int &iCategory) const {
+
+  const edm::Ptr<reco::GsfElectron> gsfPtr{ candPtr };
+  if( gsfPtr.get() == nullptr ) {
+    throw cms::Exception("MVA failure: ")
+      << " given particle is expected to be reco::GsfElectron or pat::Electron," << std::endl
+      << " but appears to be neither" << std::endl;
+  }
+
+  const float response = mvaValue(gsfPtr, iEvent, iCategory);
+  return response ;
+}
+
+float ElectronMVAEstimatorRun2::mvaValue(const reco::GsfElectron * particle, const edm::EventBase & iEvent) const {
+  // const edm::Ptr<reco::GsfElectron> gsfPtr = &particle;
+  // int iCategory = findCategory( particle );
+  // const float response = mvaValue(gsfPtr, iEvent, iCategory);
+  // return response ;
+  return 0 ;
 }
 
 int ElectronMVAEstimatorRun2::findCategory( const edm::Ptr<reco::Candidate>& candPtr) const {
@@ -139,3 +176,17 @@ int ElectronMVAEstimatorRun2::findCategory( const edm::Ptr<reco::GsfElectron>& g
   return -1;
 
 }
+
+// int ElectronMVAEstimatorRun2::findCategory( const reco::GsfElectron * particle) const {
+
+//   for (int i = 0; i < getNCategories(); ++i) {
+//       if (categoryFunctions_[i](particle)) return i;
+//   }
+
+//   edm::LogWarning  ("MVA warning") <<
+//       "category not defined for particle with pt " << particle.pt() << " GeV, eta " <<
+//           particle.superCluster()->eta() << " in " << getName() << getTag();
+
+//   return -1;
+
+// }

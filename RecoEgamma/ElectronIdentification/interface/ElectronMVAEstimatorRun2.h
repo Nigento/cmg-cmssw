@@ -16,12 +16,18 @@ class ElectronMVAEstimatorRun2 : public AnyMVAEstimatorRun2Base{
   // For use with FWLite/Python
   ElectronMVAEstimatorRun2(const std::string &mvaTag,
                            const std::string &mvaName,
-                           const bool debug = false);
+                           const std::vector <std::string> &weightFileNames,
+                           const int &nCategories,
+                           const bool debug,
+                           const std::string variableDefinition, 
+                           const std::vector <std::string> categoryCutStrings);
 
   void init(const std::vector<std::string> &weightFileNames);
 
   // Calculation of the MVA value
-  float mvaValue( const edm::Ptr<reco::Candidate>& candPtr, const edm::EventBase& iEvent, int &iCategory) const override;
+  float mvaValue( const edm::Ptr<reco::GsfElectron>& gsfPtr, const edm::EventBase & iEvent, int &iCategory) const ;
+  float mvaValue( const edm::Ptr<reco::Candidate>& candPtr, const edm::EventBase & iEvent, int &iCategory)  const override;
+  float mvaValue( const reco::GsfElectron * particle, const edm::EventBase & iEvent )  const ;
 
   // Call this function once after the constructor to declare
   // the needed event content pieces to the framework
@@ -32,6 +38,7 @@ class ElectronMVAEstimatorRun2 : public AnyMVAEstimatorRun2Base{
  private:
 
   int findCategory( const edm::Ptr<reco::GsfElectron>& gsfPtr) const;
+  /* int findCategory( const reco::GsfElectron * particle) const; */
 
   std::vector<StringCutObjectSelector<reco::GsfElectron>> categoryFunctions_;
   std::vector<int> nVariables_;
