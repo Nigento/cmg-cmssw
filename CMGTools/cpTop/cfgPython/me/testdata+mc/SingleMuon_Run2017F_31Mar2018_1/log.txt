@@ -1,0 +1,39 @@
+number of events processed: 500
+
+
+      ---- TimeReport (all times in ms; first evt is skipped) ---- 
+processed    all evts    time/proc    time/all   [%]    analyer
+---------    --------    ---------   ---------  -----   -------------
+      500         500         0.09        0.09   2.4%   JSONAnalyzer
+      500         500         0.86        0.86  21.6%   VertexAnalyzer
+      500         500         1.64        1.64  40.9%   MuonAnalyzer
+      500         500         0.10        0.10   2.4%   CMGTools.cpTop.heppy.analyzers.Selector.Selector_select_muon
+      500         500         0.08        0.08   2.0%   CMGTools.cpTop.heppy.analyzers.Selector.Selector_exclude_muon
+      500         500         0.02        0.02   0.6%   CMGTools.cpTop.heppy.analyzers.MuonSFARC.MuonSFARC_reweight_muon
+      500         500         0.01        0.01   0.4%   CMGTools.cpTop.heppy.analyzers.EventFilter.EventFilter_one_muon
+      263         500         0.01        0.01   0.2%   CMGTools.cpTop.heppy.analyzers.EventFilter.EventFilter_exlude_loose_muon
+      252         500         0.61        0.31   7.7%   CMGTools.cpTop.heppy.analyzers.ElectronAnalyzer.ElectronAnalyzer_15
+      252         500         0.01        0.01   0.2%   CMGTools.cpTop.heppy.analyzers.Selector.Selector_select_electron
+      252         500         1.72        0.86  21.6%   CMGTools.cpTop.heppy.analyzers.Selector.Selector_exclude_electron
+      252         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.ElectronSFARC.ElectronSFARC_reweight_electron
+      252         500         0.01        0.01   0.1%   CMGTools.cpTop.heppy.analyzers.EventFilter.EventFilter_one_electron
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.EventFilter.EventFilter_exclude_loose_electron
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.JetAnalyzer.JetAnalyzer_21
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.Selector.Selector_jets_20_unclean
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.JetCleaner.JetCleaner_23
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.JetCleaner.JetCleaner_24
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.Selector.Selector_jets_40
+        0         500         0.00        0.00   0.0%   ThreeJets
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.BJetAnalyzerARC.BJetAnalyzerARC_btagger
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.Selector.Selector_bjets_60
+        0         500         0.00        0.00   0.0%   OneBJets
+        0         500         0.00        0.00   0.0%   TriggerAnalyzer
+        0         500         0.00        0.00   0.0%   LHEWeightAnalyzer
+        0         500         0.00        0.00   0.0%   PileUpAnalyzer
+        0         500         0.00        0.00   0.0%   NJetsAnalyzer
+        0         500         0.00        0.00   0.0%   CMGTools.cpTop.heppy.analyzers.RegionAnalyzer.RegionAnalyzer_regionAnalyzer
+        0         500         0.00        0.00   0.0%   PFMetana
+        0         500         0.00        0.00   0.0%   NtupleProducer
+---------    --------    ---------   ---------   -------------
+        0         500         0.00        4.00 100.0%   TOTAL
+

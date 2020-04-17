@@ -1,0 +1,4 @@
+Counter efficiency :
+	 All events                                   27305 	 1.00 	 1.0000
+	 Selected                                     24436 	 0.89 	 0.8949
+

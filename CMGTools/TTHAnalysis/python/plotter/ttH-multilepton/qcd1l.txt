@@ -1,0 +1,32 @@
+# vim: syntax=sh
+minimal: LepGood_awayJet_pt > 30 
+#fix: abs(LepGood_awayJet_eta) < 2.4
+#nJet30: LepGood_awayNJet30 > 0
+veto: nLepGood == 1
+mu : abs(LepGood_pdgId)==13; Disable=True
+el : abs(LepGood_pdgId)==11 && LepGood_convVeto && LepGood_lostHits == 0; Disable=True
+presel: LepGood_sip3d < 8
+csvM: LepGood_jetBTagDeepCSV < 0.4941
+nocv_el : abs(LepGood_pdgId)==11; Disable=True
+invcv_el : !LepGood_convVeto; Disable=True
+ptfCut75: LepGood_mvaTTH > 0.90 || LepGood_jetPtRatiov2 > 0.60
+idEmuCut: LepGood_idEmu3
+#cvslDen:  LepGood_mvaTTH > 0.75 || LepGood_jetBTagCSV < 0.46
+#cvslDen:  LepGood_mvaTTH > 0.75 || (abs(LepGood_pdgId)==13 && LepGood_jetBTagCSV < 0.5426) || (abs(LepGood_pdgId)==11 && (LepGood_mvaIdSpring16GP > -0.5 || abs(LepGood_eta)<1.479))
+dcvsvlDen:  LepGood_mvaTTH > 0.90 ||  ( LepGood_jetBTagDeepCSV < 0.07 && (abs(LepGood_pdgId)==13 && LepGood_segmentCompatibility > 0.3 || abs(LepGood_pdgId)==11 && LepGood_mvaIdFall17noIso > +0.5)) 
+num : LepGood_mediumMuonId > 0 && LepGood_mvaTTH > 0.90 ; Disable=True
+pt10 : LepGood_pt > 10; Disable=True
+conePt15 : LepGood_pt*if3(LepGood_mvaTTH>0.90&&LepGood_mediumMuonId>0, 1.0, 0.90/LepGood_jetPtRatiov2) > 15; Disable=True
+conePt20 : LepGood_pt*if3(LepGood_mvaTTH>0.90&&LepGood_mediumMuonId>0, 1.0, 0.90/LepGood_jetPtRatiov2) > 20; Disable=True
+conePt30 : LepGood_pt*if3(LepGood_mvaTTH>0.90&&LepGood_mediumMuonId>0, 1.0, 0.90/LepGood_jetPtRatiov2) > 30; Disable=True
+conePt45 : LepGood_pt*if3(LepGood_mvaTTH>0.90&&LepGood_mediumMuonId>0, 1.0, 0.90/LepGood_jetPtRatiov2) > 45; Disable=True
+conePt65 : LepGood_pt*if3(LepGood_mvaTTH>0.90&&LepGood_mediumMuonId>0, 1.0, 0.90/LepGood_jetPtRatiov2) > 65; Disable=True
+conePt81 : LepGood_pt*if3(LepGood_mvaTTH>0.90&&LepGood_mediumMuonId>0, 1.0, 0.90/LepGood_jetPtRatiov2) > 81; Disable=True
+awayBMedium : LepGood_awayJet_btagDeepCSV > 0.4941; Disable=True
+awayBTight : LepGood_awayJet_btagDeepCSV > 0.8001; Disable=True
+topVeto : met_pt < 60 && LepGood_awayJet_pt < 100; Disable=True
+
+barrel : abs(LepGood_eta) <= (1.2 + 0.279 *(abs(LepGood_pdgId)==11)); Disable=True
+#early_runs : run <= 275125
+#awayJetMatch: abs(LepGood_awayJet_eta - Jet_eta) < 0.001 && abs(LepGood_awayJet_pt - Jet_pt) < 0.001
+#awayJetRawPt50 : Jet_rawPt > 80
